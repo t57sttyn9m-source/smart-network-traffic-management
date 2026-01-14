@@ -1,0 +1,77 @@
+Research Module3: Machine Learning Approaches
+In 2026, demand forecasting has evolved from simple historical extrapolation to a sophisticated integration of Machine Learning (ML) and optimization. While ML excels at pattern recognition, it often falls short in "high-stakes" decision-making under uncertainty, which is where robust optimization becomes essential.
+Appropriate Forecasting Methods:
+•	When are simple methods sufficient (MA, ARIMA)?
+Simple statistical methods are sufficient when traffic shows stable seasonality and trends, variability is low and spikes are rare, short-term forecasting is required and they are easy to implement, fast, and interpretable.
+•	When do you need deep learning (LSTM, Transformers)?
+Deep learning is required when traffic is highly non-linear and bursty, when multiple services interact, Long-term dependencies exist and accuracy under dynamic conditions is critical
+•	Trade-off: Complexity vs Accuracy
+•	Simple models -> Low complexity, Fast training, Lower accuracy in spikes, High interpretability
+•	Deep models -> High complexity, Slow training, Higher accuracy in dynamic traffic, Lower interpretability
+
+Accurate Predictions:
+•	Metrics to use
+o	MAE: average absolute error(MAE is preferred for operational decisions)
+o	RMSE: penalizes large errors(for risk-sensitive systems)
+o	MAPE: relative percentage error
+
+•	Accuracy by service and time
+o	Video: hardest to predict (bursty)
+o	API: medium predictability
+o	Analytics: most stable
+Accuracy is higher at night/off-peak and worse during spikes.
+
+•	Realistic forecast horizon
+o	High accuracy: 5–15 minutes
+o	Acceptable accuracy: up to 30 minutes
+o	Beyond that: uncertainty dominates
+What happens when predictions are wrong?
+•	Error propagation
+Prediction errors lead to: Under-allocation → QoS violations and Over-allocation → wasted bandwidth
+•	Quantifying uncertainty Uncertainty can be modeled using:
+o	Prediction intervals
+o	Probabilistic models
+o	Error distributions
+
+•	Why ML alone is not sufficient
+ML optimizes average accuracy but does not guarantee safety under worst-case conditions. Therefore, ML must be combined with robust or risk-aware optimization. Accurate Predictions:
+•	Metrics to use
+o	MAE: average absolute error(MAE is preferred for operational decisions)
+o	RMSE: penalizes large errors(for risk-sensitive systems)
+o	MAPE: relative percentage error
+
+•	Accuracy by service and time
+o	Video: hardest to predict (bursty)
+o	API: medium predictability
+o	Analytics: most stable
+Accuracy is higher at night/off-peak and worse during spikes.
+
+How can uncertainty be characterized?
+•	Point vs Interval predictions Point: single value
+Interval: range of possible values
+•	Confidence vs Prediction intervals Confidence interval = uncertainty of the model mean
+Prediction interval = uncertainty of future observations. Prediction intervals are more relevant for decision making.
+This allows optimization to protect against worst-case demand.
+
+•	Machine Learning Methods: Capabilities & Limitations
+Modern demand forecasting relies on a hierarchy of models, from classic statistical methods to deep learning.
+Capability: ML can process thousands of SKUs simultaneously and ingest external "noise" (like social media trends or local weather) that traditional models ignore.1
+Limitation: ML models are typically point estimators. They provide a "most likely" number but often fail to quantify the risk of being wrong. They are also prone to overfitting, learning historical noise rather than the signal, which leads to catastrophic failure during sudden events (like pandemics or sudden trade shifts).
+The Role of ML in Smart Networks (Capabilities)
+In the dataset we were provided, we observed that traffic varies depending on time of day and service type. Machine Learning offers the following key capabilities:
+Pattern Recognition: ML can identify that video traffic has peak periods at specific times, which simple linear models are unable to capture.
+Multivariable Forecasting: ML can simultaneously consider multiple factors (e.g., whether it is a weekend, whether there is a major sports event, etc.) to forecast demand more accurately.
+Machine Learning is used to forecast network traffic demand, not for optimization. ML takes historical traffic data and learns patterns in order to predict future demand for:
+•	Video
+•	API
+•	Analytics
+These predictions are later used as inputs for the optimization process.
+ 
+MVO vs RO
+Mean-Value Optimization (MVO) is a deterministic optimization approach in which all uncertain parameters, such as demand or traffic load, are replaced by their average values. While this simplifies the optimization problem and enables fast computation, it ignores the inherent variability and unpredictability of real-world systems. As a result, solutions obtained through MVO may perform well under typical conditions but become fragile when actual demand deviates from the mean. This limitation motivates the adoption of Robust Optimization, which explicitly accounts for uncertainty by protecting decisions against unfavorable but plausible scenarios. Robust Optimization therefore provides more reliable and resilient solutions, ensuring stable system performance even when predictions are inaccurate, and making it more suitable for practical deployment in uncertain network and resource allocation environments.
+(Mean-Value Optimization (MVO) është një metodë klasike e optimizimit matematikor, jo një metodë ML. Ajo thjesht zëvendëson të gjithë parametrat e pasigurt (p.sh. kërkesën, trafikun) me vlerën mesatare dhe më pas zgjidh një problem deterministik.)
+
+
+
+
+
