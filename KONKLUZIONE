@@ -1,0 +1,18 @@
+The experimental results demonstrate that advanced Machine Learning models, specifically Gaussian Process Regression (GPR) and Transformer-based architectures, significantly outperform traditional baseline methods such as Naive Forecasting and Moving Averages. While baseline models failed to capture the non-linear "bursty" nature of network traffic, the ML models successfully identified daily periodicity and service-specific patterns.
+
+Accuracy: The ML approach reduced the Mean Absolute Error (MAE) by over [X]% compared to the Moving Average baseline.
+
+Pattern Recognition: Through Feature Importance and Heatmap analysis, it was verified that the model prioritized "Time of Day" and "Service Priority" as the primary drivers of bandwidth demand.
+
+5.2. The Role of Uncertainty Quantification
+A critical contribution of this work is the shift from "Point Forecasting" to "Probabilistic Forecasting." By utilizing GPR, we successfully quantified the prediction uncertainty. The generated 95% Confidence Intervals provided a dynamic safety margin, proving that ML is not just about predicting the "mean" demand, but about understanding the risk of under-allocation. This uncertainty serves as the fundamental bridge to the Robust Optimization framework.
+
+5.3. Limitations of Pure ML
+Despite the high accuracy, the research identifies two core limitations of a "Pure ML" approach:
+
+Sensitivity to Anomalies: ML models are inherently retrospective; they predict based on historical patterns. In the event of unprecedented network spikes (Zero-day anomalies), pure ML tends to under-provision resources.
+
+The "Average" Bias: Standard ML loss functions (like MSE) optimize for the average case. However, in mission-critical 5G/6G networks, we care more about the worst-case scenario to ensure 99.999% reliability.
+
+5.4. Concluding Statement on ML-RO Integration
+The work concludes that while Machine Learning provides the "intelligence" to understand traffic trends, it cannot stand alone in a carrier-grade environment. The optimal strategy for network resource management is a Data-Driven Robust Optimization approach. In this paradigm, ML provides the Uncertainty Set, and Robust Optimization provides the Guarantee. This synergy ensures a network that is both efficient (not over-provisioning) and resilient (protected against uncertainty).
