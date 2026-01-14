@@ -40,7 +40,7 @@ Punimi mbështetet në analizë teorike dhe shqyrtim të literaturës shkencore 
 ## Struktura e Repository-t
 - `docs/` – Dokumentacioni dhe raporti kërkimor  
 - `figures/` – Figura, diagrame dhe ilustrime  
-- `data/` – Të dhëna mbështetëse (nëse ka)  
+- `data/` – Të dhëna mbështetëse 
 
 ## Statusi i Punimit
 - Faza aktuale: Dokumentim dhe analizë kërkimore  
