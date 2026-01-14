@@ -1,3 +1,4 @@
+5.1. Performance Synthesis 
 The experimental results demonstrate that advanced Machine Learning models, specifically Gaussian Process Regression (GPR) and Transformer-based architectures, significantly outperform traditional baseline methods such as Naive Forecasting and Moving Averages. While baseline models failed to capture the non-linear "bursty" nature of network traffic, the ML models successfully identified daily periodicity and service-specific patterns.
 
 Accuracy: The ML approach reduced the Mean Absolute Error (MAE) by over [X]% compared to the Moving Average baseline.
