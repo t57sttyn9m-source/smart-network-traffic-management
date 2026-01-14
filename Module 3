@@ -66,6 +66,53 @@ Machine Learning is used to forecast network traffic demand, not for optimizatio
 •	API
 •	Analytics
 These predictions are later used as inputs for the optimization process.
+Optional Comparisons 
+To further evaluate the effectiveness of the Transformer model, additional forecasting approaches are considered for comparison.
+LSTM and GRU networks are recurrent neural architectures specifically designed to capture temporal dependencies in time series data. They serve as deep learning baselines and allow assessment of whether the attention mechanism in Transformers provides a meaningful performance advantage over traditional sequential models.
+Linear regression with engineered features represents a simple and interpretable baseline. By incorporating features such as time of day, day of week, and lagged demand values, this model highlights the limitations of linear assumptions when modeling complex and highly dynamic network traffic patterns.
+
+Demand Forecasting with Transformers
+    Machine Learning (ML) plays a central role in this research by enabling accurate forecasting of network traffic demand. Using historical data, ML models learn complex temporal and service specific patterns that traditional statistical methods cannot fully capture. These predictions provide critical input for subsequent optimization and resource allocation processes. By improving demand forecasting accuracy, ML directly contributes to reducing Quality of Service (QoS) violations, operational costs, and inefficient capacity utilization in smart network systems.
+    The Transformer is a deep learning architecture originally developed for sequence modeling tasks. Unlike recurrent models, Transformers rely on an attention mechanism that allows the model to analyze all time steps simultaneously and determine which past observations are most relevant for predicting future values. This makes Transformers highly effective for time series forecasting, especially in scenarios where long term and short term dependencies coexist, such as network traffic behavior.
+    In this research, Transformers are particularly suitable because they can capture complex temporal relationships, handle multivariate inputs, and adapt to highly dynamic traffic patterns across different services. The attention mechanism also improves model interpretability by revealing which historical time points influence predictions the most. Compared to traditional models such as LSTM or moving averages, Transformers offer superior flexibility, scalability, and forecasting accuracy, making them an ideal choice for demand prediction in smart network environments.
+•	An alternative to Transformers is Gaussian Process Regression (GPR) that uses direct Machine Learning.
+  Gaussian Process Regression (GPR)
+   GPR is a probabilistic machine learning method used for regression and forecasting tasks. Unlike traditional models that provide only point predictions, GPR models the target variable as a distribution, allowing both prediction and uncertainty estimation. This makes GPR particularly suitable for network traffic forecasting, where demand is highly variable and uncertain.
+   In GPR, the relationship between input variables (such as time) and output variables (such as demand in Mbps) is modeled using a Gaussian process defined by a mean function and a covariance (kernel) function. The kernel controls how similar two data points are and determines the smoothness and structure of the predicted function. In this research, the Matérn kernel is used because it can capture irregular and non‑smooth traffic behavior more realistically than simple kernels.
+Unlike Transformers, which require millions of data points, GPR provides a “robust” (stable) solution for network demand forecasting by automatically offering confidence intervals (Confidence Intervals).
+Connection to Machine Learning: GPR is a non-parametric Bayesian model, which is considered one of the most elegant Machine Learning methods for uncertainty analysis.
+ Data Preparation (Preprocessing)
+   First, the dataset is filtered by service type (e.g., video) in order to analyze each service independently. The demand values (in Mbps) are extracted and indexed by time, which is represented as a numerical sequence.
+   The data is then split into training (80%) and testing (20%) sets to ensure a fair evaluation of forecasting performance on unseen data. This step guarantees that the model learns only from past data and is evaluated on future demand.
+Baseline Forecasting Models
+Two simple baseline models are implemented:
+Naive Forecast: The naive model assumes that the next demand value will be equal to the last observed value. This represents the simplest possible forecasting strategy.
+Moving Average (k = 5): The moving average smooths the demand using the last five observations. This captures short term trends while reducing noise.
+Both models are evaluated using Mean Absolute Error (MAE) and serve as reference points for measuring the improvement achieved by machine learning.
+Error Analysis
+Prediction errors are computed as the difference between real and predicted demand values. The MAE of GPR is calculated to measure overall accuracy. Additionally, the full error distribution is analyzed to identify where and how predictions fail. This step supports transparent and interpretable evaluation.
+
+Feature Importance
+   To understand what the machine learning model is actually learning, we apply a Feature Importance analysis using a Random Forest regression model. Random Forest is an ensemble learning method that builds multiple decision trees and combines their predictions, making it both accurate and interpretable.
+   Feature Importance measures how much each input variable contributes to reducing prediction error across all trees in the model. Variables that lead to larger reductions in error are assigned higher importance scores. In the context of network traffic forecasting, this allows us to identify which factors (such as historical demand, network utilization, latency, or service type) have the strongest influence on traffic behavior.
+   This step is crucial because it transforms the model from a black box into an interpretable system. Instead of only knowing the prediction result, we can also explain why the model makes certain predictions. For example, if demand history and utilization receive the highest importance scores, it confirms that congestion patterns are primarily driven by temporal demand fluctuations rather than random noise.
+Residual Diagnostics
+This code performs a diagnostic analysis of the prediction errors (residuals) of the machine learning model. In scientific research, it is not enough to say “the error is 5.” You must demonstrate that the error is random (white noise). If the error shows systematic patterns, then your model is not good.
+  Residual analysis was performed to evaluate the diagnostic behavior of the forecasting model. The residuals, defined as the difference between actual and predicted demand values, were plotted over time. The results show that residuals fluctuate around zero without strong systematic trends, indicating that the model captures the main temporal dynamics of network traffic. This confirms the adequacy of the GPR model for demand forecasting.
+Diagnostic Error Analysis Using Heatmap Visualization
+  This code performs a diagnostic analysis of the Machine Learning model’s prediction errors by visualizing them through a heatmap. The objective is to identify when and for which network services the model performs poorly, enabling a deeper understanding of model limitations.
+ Data Preparation: The dataset is first cleaned and converted into numerical time indices. The demand in Mbps is used as the target variable. The data is split into 80% training and 20% testing, following standard machine learning validation practice.
+A heatmap is generated where:
+•	X-axis: Hour of the day (00–23)
+•	Y-axis: Network service type
+•	Color intensity: Mean absolute error (MAE)
+
+The model’s performance is not uniform across time and services, highlighting the importance of contextual error analysis rather than relying solely on global accuracy metrics.
+Sensitivity Analysis
+This sensitivity analysis evaluates how the priority level of a service influences the predicted network demand. The objective is to verify whether the machine learning model has correctly learned the logical relationship between service priority and bandwidth demand, which is an important requirement for decision support systems in network management.
+If the predicted demand decreases as the priority level increases, this indicates that the machine learning model has learned an inverse relationship between priority and bandwidth demand. In other words, higher priority services are predicted to require less bandwidth, possibly because they are more optimized, compressed, or efficiently managed by the network.
+This behavior suggests that the model is not blindly fitting data, but is capturing an underlying operational rule of the network: priority does not necessarily mean higher traffic volume, but rather higher importance in service quality.
+
  
 
 
