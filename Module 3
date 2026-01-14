@@ -67,10 +67,6 @@ Machine Learning is used to forecast network traffic demand, not for optimizatio
 •	Analytics
 These predictions are later used as inputs for the optimization process.
  
-MVO vs RO
-Mean-Value Optimization (MVO) is a deterministic optimization approach in which all uncertain parameters, such as demand or traffic load, are replaced by their average values. While this simplifies the optimization problem and enables fast computation, it ignores the inherent variability and unpredictability of real-world systems. As a result, solutions obtained through MVO may perform well under typical conditions but become fragile when actual demand deviates from the mean. This limitation motivates the adoption of Robust Optimization, which explicitly accounts for uncertainty by protecting decisions against unfavorable but plausible scenarios. Robust Optimization therefore provides more reliable and resilient solutions, ensuring stable system performance even when predictions are inaccurate, and making it more suitable for practical deployment in uncertain network and resource allocation environments.
-(Mean-Value Optimization (MVO) është një metodë klasike e optimizimit matematikor, jo një metodë ML. Ajo thjesht zëvendëson të gjithë parametrat e pasigurt (p.sh. kërkesën, trafikun) me vlerën mesatare dhe më pas zgjidh një problem deterministik.)
-
 
 
 
